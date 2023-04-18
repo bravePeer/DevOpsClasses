@@ -25,12 +25,14 @@ jobs:
         with:
           python-verision: '3.8'
       
-      # Pobranie zależności
-      - name: Install numpy and pytest
-        run: |
-          pip install numpy
-          pip install pytest
+      # Instalowanie zależności
+      - name: Install requirements
+        run: pip install -r ./Lab5/requirements.txt
+      
+      # Pobranie pytest
+      - name: Install pytest
+        run: pip install pytest
           
       # Uruchomienie testów
       - name: Run tests
-        run: pytest ./test_kod.py
+        run: pytest ./Lab5/test_kod.py
