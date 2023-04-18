@@ -34,4 +34,4 @@ jobs:
           pip install pytest
 
       - name: Run tests
-        run: pytest test_kod.py
+        run: pytest ./test_kod.py
