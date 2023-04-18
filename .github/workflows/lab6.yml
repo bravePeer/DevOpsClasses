@@ -43,5 +43,5 @@ jobs:
           docker run -p 8080:80 -d tests
 
       - name: Run tests
-        run: pytest ./Lab6/test/test_api.py
+        run: pytest ./Lab6/tests/test_api.py
 
