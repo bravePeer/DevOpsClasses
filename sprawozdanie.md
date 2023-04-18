@@ -165,3 +165,23 @@
 7. Sprawdzenie poprawności testów na githubie.
     <br>
     ![Alt text](ss/Lab6/test%20github.PNG)
+
+
+## GITHUB Actions - testy funckjonalne + build
+---
+
+### Operacje związane z automatyzacją testów, budowaniem aplikacji oraz wrzuceniem w docker huba.
+
+1. Utworzone zostały 3 branche: test, dev, dev_feature_1.
+    <br>
+    ![Alt text](ss/Lab7/create%20branch.PNG)
+
+
+   
+
+Na branch dev na pull requesta uruchomić testy jednostkowe (lab 05)
+Na branch test na pull requesta uruchomić testy funkcjonalne (lab 06)
+W momencie jak pozytywnie przejdzie merge na branchu test to po wykonaniu testów obraz ma być spuchowany do docker huba ( login i hasło umieszczamy w sekretach repozytoirum, nie podajemy czystego hasła i loginu w kodzie git actions)
+W branchu dev_feature_1 wykonaj zmiany dla kodu programu
+Zmerguj za pomocą pull requesta branch dev_feature_1 z branchem dev (pokaż jak tety się uruchomiły)
+Zmerguj za pomocą pull requesta branch dev z branchem test (pokaż jak tety się uruchomiły, oraz czy po przejściu testach obraz pojawił się w docker hubie) UWAGA przetestuj też dla sytuacji gdy aplikacja nie przejdzie testów ( na branchu dev pull request z failem na testach, a w branchu test nie powinno dojść do spushowania aplikacji do dockerhuba)
