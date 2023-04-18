@@ -40,5 +40,4 @@ def div():
     except:
         return Response('Bad request', 400)
     
-
 app.run('0.0.0.0', port=80)
