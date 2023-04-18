@@ -1,6 +1,7 @@
-# Sprawozdanie 05
----
+# Sprawozdanie Lab5, Lab6, Lab7
+
 ## GITHUB Actions
+---
 
 ### Operacje związane z automatyzacją testów jednostkowych.
 
