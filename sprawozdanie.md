@@ -46,10 +46,13 @@
     ```
 
 2. Uruchomienie unitestów lokanie w celu weryfikacji - wszystke przechodzą.
-<br>
-![Alt text](DevOpsClasses/ss/Lab5/test%20local.PNG)
+    <br>
+    ![Alt text](ss/Lab5/test%20local.PNG)
 
 3. Utworzenie git action, który zbuduje środowisko oraz uruchomi testy na gałęzi main po wrzuceniu commita.
-    ![Alt text](DevOpsClasses/ss/Lab5/workflow.PNG)
+    <br>
+    ![Alt text](ss/Lab5/workflow.PNG)
 
 4. Potwierdzenie wykonywania kodu po zrealizowaniu commita.
+   <br>
+   ![Alt text](ss/Lab5/working%20workflow.PNG)
