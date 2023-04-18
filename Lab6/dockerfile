@@ -1,0 +1,10 @@
+FROM python:3.8
+
+COPY app/requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+EXPOSE 80
+
+WORKDIR /app
+COPY app/ .
+
+ENTRYPOINT ["python", "api.py"]

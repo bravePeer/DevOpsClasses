@@ -1,0 +1,47 @@
+name: CI
+
+# Kotrolowanie podczas pracy
+on:
+  # Triggery kiedy ma się wykonać ta akcja
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  # Ten workflow zawiera jeden job o nazwie unitest
+  unitest:
+    # Ustawienie maszyny na którym będą się odbywały testy
+    runs-on: ubuntu-latest
+
+    # Kolejne kroki zadania
+    steps:
+      # Ustwanie czego używa workflow
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-verision: '3.8'
+      
+      # Instalowanie zależności
+      #- name: Install requirements
+      #  run: pip install -r ./Lab6/tests/requirements.txt
+      
+      # Pobranie narzędzi do testowania
+      - name: Install pytest
+        run: |
+          pip install pytest
+          pip install requests
+          
+      # Zbudowanie oraz uruchomienie obrazu
+      - name: Build and run docker
+        run: |
+        cd Lab6/
+        docker build -t tests .
+        docker run -p 8080:80 -d test
+
+      - name: Run tests
+        run: pytest test_api
+
