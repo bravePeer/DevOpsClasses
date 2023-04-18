@@ -1,4 +1,4 @@
-name: CI
+name: CI_LAB6
 
 # Kotrolowanie podczas pracy
 on:
@@ -40,7 +40,7 @@ jobs:
         run: |
           cd ./Lab6
           docker build -t tests .
-          docker run -p 8080:80 -d test
+          docker run -p 8080:80 -d tests
 
       - name: Run tests
         run: pytest test_api
