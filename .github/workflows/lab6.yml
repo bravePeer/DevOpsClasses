@@ -38,9 +38,9 @@ jobs:
       # Zbudowanie oraz uruchomienie obrazu
       - name: Build and run docker
         run: |
-        cd Lab6/
-        docker build -t tests .
-        docker run -p 8080:80 -d test
+          cd ./tests
+          docker build -t tests .
+          docker run -p 8080:80 -d test
 
       - name: Run tests
         run: pytest test_api
