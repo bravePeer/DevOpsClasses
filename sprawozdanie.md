@@ -158,7 +158,10 @@
     <br>
     ![Alt text](ss/Lab6/local%20test.PNG)
 
-6. Stworzenie git action, który po commitowaniu buduje aplikację oraz wykonuje testy.
-    ```yml
-    
-    ```
+6. Stworzenie git action, który po commitowaniu buduje aplikację oraz wykonuje testy. Pokazany został istoty fragment pliku.
+    <br>
+    ![Alt text](ss/Lab6/worklfow.PNG)
+
+7. Sprawdzenie poprawności testów na githubie.
+    <br>
+    ![Alt text](ss/Lab6/test%20github.PNG)
