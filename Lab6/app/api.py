@@ -11,7 +11,7 @@ def main_route():
 def sub():
     try:
         a = float(request.args.get('a'))
-        b = float(request.args.get('b'))
+        b = -float(request.args.get('b'))
         result = apiservice.sub(a, b)
         response = Response(str(result), 200)
         return response
