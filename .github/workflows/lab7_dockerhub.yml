@@ -42,6 +42,6 @@ jobs:
       run: |
         cd ./Lab6
         echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        docker build -t devops-app .
+        docker build -t devops-app ./Lab6/
         docker tag devops-app ${{ secrets.DOCKER_USERNAME }}/devops-app:latest
         docker push ${{ secrets.DOCKER_USERNAME }}/devops-app:latest
