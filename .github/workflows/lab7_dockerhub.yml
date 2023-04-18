@@ -21,7 +21,7 @@ jobs:
           ls
           
     - name: Functional Tests
-      uses: ./github/workflows/lab7_api.yml
+      uses: ./.github/actions/lab7_api.yml
 
     - name: Login to Docker Hub and push
       env:
