@@ -1,19 +1,17 @@
-name: CI_LAB6
+name: Dev tests
 
 # Kotrolowanie podczas pracy
 on:
   # Triggery kiedy ma się wykonać ta akcja
-  push:
-    branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "dev" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
   # Ten workflow zawiera jeden job o nazwie unitest
-  functionaltestLab6:
+  unitest:
     # Ustawienie maszyny na którym będą się odbywały testy
     runs-on: ubuntu-latest
 
@@ -25,20 +23,14 @@ jobs:
         with:
           python-verision: '3.8'
       
-      # Pobranie narzędzi do testowania
-      - name: Install pytest
-        run: |
-          pip install pytest
-          pip install requests
-          
-      # Zbudowanie oraz uruchomienie obrazu
-      - name: Build and run docker
-        run: |
-          cd ./Lab6
-          docker build -t tests .
-          docker run -p 8080:80 -d tests
+      # Instalowanie zależności
+      - name: Install requirements
+        run: pip install -r ./Lab5/requirements.txt
       
-      # Wykonanie testów
+      # Pobranie pytest
+      - name: Install pytest
+        run: pip install pytest
+          
+      # Uruchomienie testów
       - name: Run tests
-        run: pytest ./Lab6/tests/test_api.py
-
+        run: pytest ./Lab5/test_kod.py
