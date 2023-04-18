@@ -57,3 +57,108 @@
 4. Potwierdzenie wykonywania kodu po zrealizowaniu commita.
    <br>
    ![Alt text](ss/Lab5/working%20workflow.PNG)
+
+
+## GITHUB Actions - testy funckjonalne + build
+---
+
+### Operacje związane z automatyzacją testów funkconalnych dla aplikacji REST API
+
+1. Utworzonie kodu zawierającego 3 funkcje (odejmowania, mnożenia, dzielenia), które są podpięte do różnych endpointów. Dla funkcji z dzieleniem podczas próby dzielenia przez 0 zwracay zostaje bad request (400).
+   ```python
+   #Endpoint, który odejmuje
+   @app.route('/api/sub', methods=['GET'])
+    def sub():
+        try:
+            a = float(request.args.get('a'))
+            b = float(request.args.get('b'))
+            result = apiservice.sub(a, b)
+            response = Response(str(result), 200)
+            return response
+        except:
+            return Response('Bad request', 400)
+    #Endpoint, który mnoży
+    @app.route('/api/mul', methods=['GET'])
+    def mul():
+        try:
+            a = float(request.args.get('a'))
+            b = float(request.args.get('b'))
+            result =  apiservice.mul(a, b)
+            response = Response(str(result), 200)
+            return response
+        except:
+            return Response('Bad request', 400)
+    #Endpoint, który dzieli
+    @app.route('/api/div', methods=['GET'])
+    def div():
+        try:
+            a = float(request.args.get('a'))
+            b = float(request.args.get('b'))
+            result =  apiservice.div(a, b)
+            response = Response(str(result), 200)
+            return response
+        except:
+            return Response('Bad request', 400)
+   ```
+
+2. Napisanie testów dla każdego endpointa, również w przypadku gdy do funkcji dzielącej zostanie podane 0 w mianowniku.
+    ```python
+    def test_sub():
+        a = '3.0'
+        b = '2.0'
+        result = b'1.0'
+        r = requests.get('http://localhost:8080/api/sub?a='+a+'&b='+b)
+        assert r.status_code==200
+        assert r.content== result
+
+    def test_mul():
+        a = '3.0'
+        b = '3.0'
+        result = b'9.0'
+        r = requests.get('http://localhost:8080/api/mul?a='+a+'&b='+b)
+        assert r.status_code==200
+        assert r.content== result
+
+    def test_div():
+        a = '4.0'
+        b = '2.0'
+        result = b'2.0'
+        r = requests.get('http://localhost:8080/api/div?a='+a+'&b='+b)
+        assert r.status_code==200
+        assert r.content== result
+
+    def test_div_by_0():
+        a = '4'
+        b = '0'
+        r = requests.get('http://localhost:8080/api/div?a='+a+'&b='+b)
+        assert r.status_code==400
+    ```
+    
+3. Stworzenie Dockerfile, który osadza aplikacje rest API w kontenerze.
+    ```Dockerfile
+    FROM python:3.8
+
+    COPY app/requirements.txt ./
+    RUN pip install --no-cache-dir -r requirements.txt
+    EXPOSE 80
+
+    WORKDIR /app
+    COPY app/ .
+
+    ENTRYPOINT ["python", "api.py"]
+    ```
+
+4. Zbudowanie oraz uruchomienie obrazu lokalnie.
+    <br>
+    ![Alt text](ss/Lab6/build.PNG)
+    <br>
+    ![Alt text](ss/Lab6/run.PNG)
+
+5. Uruchomienie testów lokalnie.
+    <br>
+    ![Alt text](ss/Lab6/local%20test.PNG)
+
+6. Stworzenie git action, który po commitowaniu buduje aplikację oraz wykonuje testy.
+    ```yml
+    
+    ```
