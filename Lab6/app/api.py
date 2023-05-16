@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/api', methods=['GET'])
 def main_route():
-    return 'hello'
+    return 'hello<br>som changes'
 
 @app.route('/api/sub', methods=['GET'])
 def sub():
