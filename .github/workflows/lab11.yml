@@ -46,3 +46,10 @@ jobs:
         docker build -t devops-app ./Lab6/
         docker tag devops-app ${{ secrets.DOCKER_USERNAME }}/devops-app:latest
         docker push ${{ secrets.DOCKER_USERNAME }}/devops-app:latest
+    
+    - name: Restart deployment on AKS
+      uses: actions-hub/kubectl@master
+      env:
+        KUBE_CONFIG${{ secrets.AKS_KUBECONFIG }}
+      with:
+        args: rollout restart deployment devops-app
