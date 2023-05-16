@@ -50,6 +50,6 @@ jobs:
     - name: Restart deployment on AKS
       uses: actions-hub/kubectl@master
       env:
-        KUBE_CONFIG${{ secrets.AKS_KUBECONFIG }}
+        KUBE_CONFIG: ${{ secrets.AKS_KUBECONFIG }}
       with:
         args: rollout restart deployment devops-app
