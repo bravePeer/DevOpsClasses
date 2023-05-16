@@ -1,0 +1,55 @@
+name: Push to docker hub
+on:
+  pull_request:
+    branches:
+      - test
+    types:
+      - closed
+jobs:
+  push-docker-image:
+    if: github.event.pull_request.merged
+    
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - uses: actions/setup-python@v4
+      with:
+        python-verision: '3.8'
+    
+    # Pobranie narzędzi do testowania
+    - name: Install pytest
+      run: |
+        pip install pytest
+        pip install requests
+          
+      # Zbudowanie oraz uruchomienie obrazu
+    - name: Build and run docker
+      run: |
+        cd ./Lab6
+        docker build -t tests .
+        docker run -p 8080:80 -d tests
+      
+      # Wykonanie testów
+    - name: Run tests
+      run: pytest ./Lab6/tests/test_api.py
+
+      # Logowanie do dockerhuba
+    - name: Login to Docker Hub and push
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_TOKEN }}
+      run: |
+        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        docker build -t devops-app ./Lab6/
+        docker tag devops-app ${{ secrets.DOCKER_USERNAME }}/devops-app:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/devops-app:latest
+    
+    - name: Restart deployment on AKS
+      uses: actions-hub/kubectl@master
+      env:
+        KUBE_CONFIG: ${{ secrets.AKS_KUBECONFIG }}
+      with:
+        args: rollout restart deployment devops-app

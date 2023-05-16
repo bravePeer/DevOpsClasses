@@ -24,7 +24,7 @@
         return np.mean(a)
     ```
 
-2. Utorzenie Unitestów testujących funkcje, testują poprawność również przy próbie podzielenia przez 0.
+2. Utorzenie unit testów testujących funkcje, testują poprawność również przy próbie podzielenia przez 0.
     ```python
     import kod
     import pytest
@@ -46,7 +46,7 @@
             assert kod.mean([3,4,5]) == 4, "should be 4"
     ```
 
-2. Uruchomienie unitestów lokanie w celu weryfikacji - wszystke przechodzą.
+2. Uruchomienie unit testów lokanie w celu weryfikacji - wszystke przechodzą.
     <br>
     ![Alt text](ss/Lab5/test%20local.PNG)
 
@@ -176,12 +176,56 @@
     <br>
     ![Alt text](ss/Lab7/create%20branch.PNG)
 
+2. Utworzenie akcji uruchamiającej unit testy w momencie pull requesta wykonywanego na gałąź dev. Fragment pliku:
+    <br>
+    ![Alt text](ss/Lab7/dev%20test.PNG)
 
-   
+3. Utworzenie akcji uruchamiającej testy funkcjonalne w momencie pull requesta wykonywanego na gałąź test. Fragment pliku:
+   <br>
+    ![Alt text](ss/Lab7/api%20test.PNG)
 
-Na branch dev na pull requesta uruchomić testy jednostkowe (lab 05)
-Na branch test na pull requesta uruchomić testy funkcjonalne (lab 06)
-W momencie jak pozytywnie przejdzie merge na branchu test to po wykonaniu testów obraz ma być spuchowany do docker huba ( login i hasło umieszczamy w sekretach repozytoirum, nie podajemy czystego hasła i loginu w kodzie git actions)
-W branchu dev_feature_1 wykonaj zmiany dla kodu programu
-Zmerguj za pomocą pull requesta branch dev_feature_1 z branchem dev (pokaż jak tety się uruchomiły)
-Zmerguj za pomocą pull requesta branch dev z branchem test (pokaż jak tety się uruchomiły, oraz czy po przejściu testach obraz pojawił się w docker hubie) UWAGA przetestuj też dla sytuacji gdy aplikacja nie przejdzie testów ( na branchu dev pull request z failem na testach, a w branchu test nie powinno dojść do spushowania aplikacji do dockerhuba)
+4. Utworzenie akcji, która wykonuje push do docker hub'a po połączeniu na gałęzi test. 
+    <br>
+    ![Alt text](ss/Lab7/push%20to%20dockerhub.PNG)
+
+5. Aby możliwe było połączenie z docker hub należy utworzyć sekrety.
+    <br>
+    ![Alt text](ss/Lab7/add%20secrets.PNG)
+
+6. Zmodyfikowanie plików tak, by nie przechodziły testów.Próba wykonania merga gałęzi dev_feature_1 do dev.
+    <br>
+    ![Alt text](ss/Lab7/01%20bad%20merge.PNG)
+
+7. Sprawdzenie powodu niepowodzenia.
+    <br>
+    ![Alt text](ss/Lab7/01%20why.PNG)
+
+8. Naprawienie pliku.
+    <br>
+    ![Alt text](ss/Lab7/02%20fix.PNG)
+
+9.  Próba wykonania merga gałęzi dev do test.
+    <br>
+    ![Alt text](ss/Lab7/03%20bad.PNG)
+
+10. Sprawdzenie powodu niepowodzenia.
+    <br>
+    ![Alt text](ss/Lab7/04%20why.PNG)
+
+11. Naprawienie pliku.
+    <br>
+    ![Alt text](ss/Lab7/05%20good.PNG)
+
+12. Wykonanie merga.
+    <br>
+    ![Alt text](ss/Lab7/06%20merge.PNG)
+
+13. Sprawdzenie poprawności działania pusha do docker huba.
+    <br>
+    ![Alt text](ss/Lab7/07%20good%20push%20to%20docker.PNG)
+
+14. Na docker hub sprawdzenie dodania obrazu.
+    <br>
+    ![Alt text](ss/Lab7/10%20docker%20hub.PNG)
+
+
