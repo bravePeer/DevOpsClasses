@@ -1,14 +1,11 @@
 name: Push to docker hub
 on:
+  push:
+    branches: [ "lab11" ]
   pull_request:
-    branches:
-      - test
-    types:
-      - closed
+    branches: [ "lab11" ]
 jobs:
-  push-docker-image:
-    if: github.event.pull_request.merged
-    
+  aks-deployment:
     runs-on: ubuntu-latest
     steps:
 
@@ -32,7 +29,7 @@ jobs:
         docker build -t tests .
         docker run -p 8080:80 -d tests
       
-      # Wykonanie testów
+      # Wykonanie testów z poprzednik laboratoriów
     - name: Run tests
       run: pytest ./Lab6/tests/test_api.py
 
